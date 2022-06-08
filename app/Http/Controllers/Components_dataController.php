@@ -132,4 +132,14 @@ class Components_dataController extends Controller{
 		$arr = DB::select(DB::raw($sqltext), $query_params);
 		return $arr;
 	}
+	/**
+     * user_orders_view_name_option_list Model Action
+     * @return array
+     */
+	function user_orders_view_name_option_list(Request $request){
+		$sqltext = "SELECT  DISTINCT name AS value,name AS label FROM vendors_tb ORDER BY name ASC";
+		$query_params = [];
+		$arr = DB::select(DB::raw($sqltext), $query_params);
+		return $arr;
+	}
 }

@@ -23,6 +23,7 @@ class AccountController extends Controller{
 	function index(){
 		$rec_id = Auth::id();
 		$query = Users_Tb::query();
+		$query->join("departments_tb", "users_tb.department", "=", "departments_tb.department_id");
 		$record = $query->findOrFail($rec_id,  Users_Tb::accountviewFields());
 		return $this->respond($record);
 	}

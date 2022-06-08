@@ -25,18 +25,14 @@ class Users_TbAccountEditRequest extends FormRequest
 		
         return [
             
-				"matric_no" => "filled|string",
+				"matric_no" => "nullable|string",
 				"firstname" => "filled|string",
 				"lastname" => "filled|string",
 				"phone" => "nullable|string",
-				"department" => "filled",
+				"department" => "filled|string",
 				"level" => "nullable|string",
 				"status" => "filled|numeric",
-				"email_link" => "nullable|email",
-				"email_comfirm" => "filled|numeric",
-				"email_token" => "nullable|email",
 				"gender" => "nullable",
-				"deleted" => "filled|numeric",
 				"photo" => "nullable",
         ];
     }

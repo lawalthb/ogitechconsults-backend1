@@ -105,4 +105,31 @@ class Order_TbController extends Controller
 		$rec_id = $record->order_id;
 		return $this->respond($record);
 	}
+	
+
+	/**
+     * List table records
+	 * @param  \Illuminate\Http\Request
+     * @param string $fieldname //filter records by a table field
+     * @param string $fieldvalue //filter value
+     * @return \Illuminate\View\View
+     */
+	function user_orders(Request $request, $fieldname = null , $fieldvalue = null){
+		$query = Order_Tb::query();
+		if($request->search){
+			$search = trim($request->search);
+			Order_Tb::search($query, $search);
+		}
+		$query->join("products_tb", "order_tb.product_id", "=", "products_tb.product_id");
+		$query->join("vendors_tb", "order_tb.vendor_id", "=", "vendors_tb.vendor_id");
+		$query->join("users_tb", "order_tb.user_id", "=", "users_tb.user_id");
+		$orderby = $request->orderby ?? "order_tb.order_id";
+		$ordertype = $request->ordertype ?? "desc";
+		$query->orderBy($orderby, $ordertype);
+		if($fieldname){
+			$query->where($fieldname , $fieldvalue); //filter by a single field name
+		}
+		$records = $this->paginate($query, Order_Tb::userOrdersFields());
+		return $this->respond($records);
+	}
 }

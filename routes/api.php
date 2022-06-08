@@ -45,7 +45,9 @@ Route::middleware(['auth:api'])->group(function () {
 	Route::post('order_tb/add', 'Order_TbController@add');	
 	Route::any('order_tb/edit/{rec_id}', 'Order_TbController@edit');	
 	Route::any('order_tb/delete/{rec_id}', 'Order_TbController@delete');	
-	Route::post('order_tb/shop_cart', 'Order_TbController@shop_cart');
+	Route::post('order_tb/shop_cart', 'Order_TbController@shop_cart');	
+	Route::get('order_tb/user_orders', 'Order_TbController@user_orders');
+	Route::get('order_tb/user_orders/{filter?}/{filtervalue?}', 'Order_TbController@user_orders');
 
 /* routes for Departments_Tb Controller  */	
 	Route::get('departments_tb', 'Departments_TbController@index');
@@ -104,6 +106,20 @@ Route::middleware(['auth:api'])->group(function () {
 	Route::post('sales_tb/add', 'Sales_TbController@add');	
 	Route::any('sales_tb/edit/{rec_id}', 'Sales_TbController@edit');	
 	Route::any('sales_tb/delete/{rec_id}', 'Sales_TbController@delete');
+
+/* routes for User_Orders_View Controller  */	
+	Route::get('user_orders_view', 'User_Orders_ViewController@index');
+	Route::get('user_orders_view/index', 'User_Orders_ViewController@index');
+	Route::get('user_orders_view/index/{filter?}/{filtervalue?}', 'User_Orders_ViewController@index');
+
+/* routes for Level Controller  */	
+	Route::get('level', 'LevelController@index');
+	Route::get('level/index', 'LevelController@index');
+	Route::get('level/index/{filter?}/{filtervalue?}', 'LevelController@index');	
+	Route::get('level/view/{rec_id}', 'LevelController@view');	
+	Route::post('level/add', 'LevelController@add');	
+	Route::any('level/edit/{rec_id}', 'LevelController@edit');	
+	Route::any('level/delete/{rec_id}', 'LevelController@delete');
 });
 
 	
@@ -124,7 +140,8 @@ Route::get('components_data/users_tb_email_exist/{arg1?}', 'Components_dataContr
 Route::get('components_data/users_tb_firstname_exist/{arg1?}', 'Components_dataController@users_tb_firstname_exist');	
 Route::get('components_data/order_no_option_list/{arg1?}', 'Components_dataController@order_no_option_list');	
 Route::get('components_data/user_id_option_list/{arg1?}', 'Components_dataController@user_id_option_list');	
-Route::get('components_data/checkout_by_option_list/{arg1?}', 'Components_dataController@checkout_by_option_list');
+Route::get('components_data/checkout_by_option_list/{arg1?}', 'Components_dataController@checkout_by_option_list');	
+Route::get('components_data/user_orders_view_name_option_list/{arg1?}', 'Components_dataController@user_orders_view_name_option_list');
 
 Route::post('fileuploader/upload/{fieldname}', 'FileUploaderController@upload');
 Route::post('fileuploader/s3upload/{fieldname}', 'FileUploaderController@s3upload');

@@ -154,11 +154,7 @@ class Users_Tb extends Authenticatable
 			"department", 
 			"level", 
 			"status", 
-			"email_link", 
-			"email_comfirm", 
-			"email_token", 
 			"gender", 
-			"deleted", 
 			"photo" 
 		];
 	}
@@ -171,21 +167,18 @@ class Users_Tb extends Authenticatable
      */
 	public static function accountviewFields(){
 		return [ 
-			"user_id", 
-			"matric_no", 
-			"firstname", 
-			"lastname", 
-			"email", 
-			"phone", 
-			"department", 
-			"level", 
-			"status", 
-			"email_link", 
-			"email_comfirm", 
-			"email_token", 
-			"reg_date", 
-			"gender", 
-			"deleted" 
+			"users_tb.user_id AS user_id", 
+			"users_tb.matric_no AS matric_no", 
+			"users_tb.firstname AS firstname", 
+			"users_tb.lastname AS lastname", 
+			"users_tb.email AS email", 
+			"users_tb.phone AS phone", 
+			"users_tb.department AS department", 
+			"departments_tb.name AS departments_tb_name", 
+			"users_tb.status AS status", 
+			"users_tb.reg_date AS reg_date", 
+			"users_tb.gender AS gender", 
+			"users_tb.photo AS photo" 
 		];
 	}
 	
@@ -197,21 +190,18 @@ class Users_Tb extends Authenticatable
      */
 	public static function exportAccountviewFields(){
 		return [ 
-			"user_id", 
-			"matric_no", 
-			"firstname", 
-			"lastname", 
-			"email", 
-			"phone", 
-			"department", 
-			"level", 
-			"status", 
-			"email_link", 
-			"email_comfirm", 
-			"email_token", 
-			"reg_date", 
-			"gender", 
-			"deleted" 
+			"users_tb.user_id AS user_id", 
+			"users_tb.matric_no AS matric_no", 
+			"users_tb.firstname AS firstname", 
+			"users_tb.lastname AS lastname", 
+			"users_tb.email AS email", 
+			"users_tb.phone AS phone", 
+			"users_tb.department AS department", 
+			"departments_tb.name AS departments_tb_name", 
+			"users_tb.status AS status", 
+			"users_tb.reg_date AS reg_date", 
+			"users_tb.gender AS gender", 
+			"users_tb.photo AS photo" 
 		];
 	}
 	
