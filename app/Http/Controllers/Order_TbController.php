@@ -24,6 +24,8 @@ class Order_TbController extends Controller
 			$search = trim($request->search);
 			Order_Tb::search($query, $search);
 		}
+		$query->join("products_tb", "order_tb.product_id", "=", "products_tb.product_id");
+		$query->join("vendors_tb", "order_tb.vendor_id", "=", "vendors_tb.vendor_id");
 		$orderby = $request->orderby ?? "order_tb.order_id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);

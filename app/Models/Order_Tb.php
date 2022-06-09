@@ -38,10 +38,10 @@ class Order_Tb extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				order_no LIKE ?  OR 
-				mat_no LIKE ?  OR 
-				payment_optn LIKE ?  OR 
-				remark LIKE ? 
+				order_tb.order_no LIKE ?  OR 
+				order_tb.mat_no LIKE ?  OR 
+				order_tb.payment_optn LIKE ?  OR 
+				order_tb.remark LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%","%$text%"
@@ -58,21 +58,12 @@ class Order_Tb extends Model
      */
 	public static function listFields(){
 		return [ 
-			"order_id", 
-			"order_no", 
-			"product_id", 
-			"vendor_id", 
-			"user_id", 
-			"mat_no", 
-			"rate", 
-			"qty", 
-			"total_amount", 
-			"payment_optn", 
-			"date", 
-			"dare_reg", 
-			"order_status", 
-			"sales_status", 
-			"remark" 
+			"order_tb.order_id AS order_id", 
+			"order_tb.product_id AS product_id", 
+			"products_tb.product_name AS products_tb_product_name", 
+			"order_tb.vendor_id AS vendor_id", 
+			"vendors_tb.name AS vendors_tb_name", 
+			"order_tb.qty AS qty" 
 		];
 	}
 	
@@ -84,21 +75,12 @@ class Order_Tb extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"order_id", 
-			"order_no", 
-			"product_id", 
-			"vendor_id", 
-			"user_id", 
-			"mat_no", 
-			"rate", 
-			"qty", 
-			"total_amount", 
-			"payment_optn", 
-			"date", 
-			"dare_reg", 
-			"order_status", 
-			"sales_status", 
-			"remark" 
+			"order_tb.order_id AS order_id", 
+			"order_tb.product_id AS product_id", 
+			"products_tb.product_name AS products_tb_product_name", 
+			"order_tb.vendor_id AS vendor_id", 
+			"vendors_tb.name AS vendors_tb_name", 
+			"order_tb.qty AS qty" 
 		];
 	}
 	

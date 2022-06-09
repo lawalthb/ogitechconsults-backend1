@@ -1,10 +1,11 @@
 <?php 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
-class Users_Tb extends Authenticatable 
+class Users_Tb extends Authenticatable implements MustVerifyEmail
 {
 	use Notifiable, HasApiTokens;
 	
@@ -30,7 +31,7 @@ class Users_Tb extends Authenticatable
      *
      * @var array
      */
-	protected $fillable = ["matric_no","firstname","lastname","email","phone","department","level","password","status","email_link","email_comfirm","email_token","gender","deleted","photo"];
+	protected $fillable = ["matric_no","firstname","lastname","email","phone","department","level","password","status","email_link","email_comfirm","email_token","gender","deleted","photo","email_verified_at"];
 	/**
      * Table fields which are not included in select statement
      *
@@ -58,7 +59,8 @@ class Users_Tb extends Authenticatable
 			"users_tb.gender AS gender", 
 			"users_tb.status AS status", 
 			"users_tb.reg_date AS reg_date", 
-			"users_tb.photo AS photo" 
+			"users_tb.photo AS photo", 
+			"users_tb.email_verified_at AS email_verified_at" 
 		];
 	}
 	
@@ -82,7 +84,8 @@ class Users_Tb extends Authenticatable
 			"users_tb.gender AS gender", 
 			"users_tb.status AS status", 
 			"users_tb.reg_date AS reg_date", 
-			"users_tb.photo AS photo" 
+			"users_tb.photo AS photo", 
+			"users_tb.email_verified_at AS email_verified_at" 
 		];
 	}
 	
@@ -108,7 +111,8 @@ class Users_Tb extends Authenticatable
 			"email_token", 
 			"reg_date", 
 			"gender", 
-			"deleted" 
+			"deleted", 
+			"email_verified_at" 
 		];
 	}
 	
@@ -134,7 +138,8 @@ class Users_Tb extends Authenticatable
 			"email_token", 
 			"reg_date", 
 			"gender", 
-			"deleted" 
+			"deleted", 
+			"email_verified_at" 
 		];
 	}
 	
@@ -155,7 +160,8 @@ class Users_Tb extends Authenticatable
 			"level", 
 			"status", 
 			"gender", 
-			"photo" 
+			"photo", 
+			"email_verified_at" 
 		];
 	}
 	
@@ -178,7 +184,7 @@ class Users_Tb extends Authenticatable
 			"users_tb.status AS status", 
 			"users_tb.reg_date AS reg_date", 
 			"users_tb.gender AS gender", 
-			"users_tb.photo AS photo" 
+			"users_tb.email_verified_at AS email_verified_at" 
 		];
 	}
 	
@@ -201,7 +207,7 @@ class Users_Tb extends Authenticatable
 			"users_tb.status AS status", 
 			"users_tb.reg_date AS reg_date", 
 			"users_tb.gender AS gender", 
-			"users_tb.photo AS photo" 
+			"users_tb.email_verified_at AS email_verified_at" 
 		];
 	}
 	
@@ -226,7 +232,8 @@ class Users_Tb extends Authenticatable
 			"email_token", 
 			"gender", 
 			"deleted", 
-			"photo" 
+			"photo", 
+			"email_verified_at" 
 		];
 	}
 	
@@ -272,5 +279,15 @@ class Users_Tb extends Authenticatable
 	{
 		// Your your own implementation.
 		$this->notify(new \App\Notifications\ResetPassword($token));
+	}
+	
+
+	/**
+     * Send user account verification link to user email
+     * @return string
+     */
+	public function sendEmailVerificationNotification()
+	{
+		$this->notify(new \App\Notifications\VerifyEmail); // my notification
 	}
 }

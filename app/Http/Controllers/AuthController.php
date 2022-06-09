@@ -39,6 +39,11 @@ class AuthController extends Controller{
             return $this->reject("Username or password not correct", 400);
         }
 		$user = auth()->user();
+		//check if user has verified email
+		if (!$user->hasVerifiedEmail()) {
+			$token = $this->generateUserToken($user);
+			return $this->respond(["nextpage" => "index/verifyemail?token={$token}"]);
+		}
 		$loginData = $this->getUserLoginData($user);
         return $this->respond($loginData);
 	}
@@ -50,13 +55,56 @@ class AuthController extends Controller{
      */
 	function register(Users_TbRegisterRequest $request){
 		$modeldata = $request->validated();
+		
+		if( array_key_exists("photo", $modeldata) ){
+			//move uploaded file from temp directory to destination directory
+			$fileInfo = $this->moveUploadedFiles($modeldata['photo'], "photo");
+			$modeldata['photo'] = $fileInfo['filepath'];
+		}
 		$modeldata['password'] = bcrypt($modeldata['password']);
 		
 		//save Users_tb record
 		$user = $record = Users_tb::create($modeldata);
 		$rec_id = $record->user_id;
-		$loginData =  $this->getUserLoginData();
-		return $this->respond($loginData);
+	$this->sendMailOnRecordUserregister($record);
+		$user->sendEmailVerificationNotification();
+		$token = $this->generateUserToken($user);
+		return $this->respond(["nextpage" => "/index/verifyemail?token=$token"]);
+	}
+	
+
+	/**
+     * verify user email
+     * @return \Illuminate\Http\Response
+     */
+	public function verifyemail(Request $request) {
+		if (!$request->hasValidSignature()) {
+			return $this->reject("Invalid/Expired url provided.", 400);
+		}
+		$token = $request->input("token");
+		$userId = $this->getUserIDFromJwt($token);
+		$user = Users_Tb::findOrFail($userId);
+		if (!$user->hasVerifiedEmail()) {
+			$user->markEmailAsVerified();
+		}
+		$emailVerifiedPage = config("app.frontend_url") . "/#/index/emailverified";
+		return redirect()->to($emailVerifiedPage);
+	}
+	
+
+	/**
+     * resend email verification link to user email
+     * @return \Illuminate\Http\Response
+     */
+	public function resendverifyemail(Request $request) {
+		$token = $request->get("token");
+		$userId = $this->getUserIDFromJwt($token);
+		$user = Users_Tb::findOrFail($userId);
+		if ($user->hasVerifiedEmail()) {
+			return $this->reject("Email already verified.", 400);
+		}
+		$user->sendEmailVerificationNotification();
+		return $this->respond("Email verification link has been resent");
 	}
 	
 

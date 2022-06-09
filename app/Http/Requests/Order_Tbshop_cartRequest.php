@@ -26,7 +26,7 @@ class Order_Tbshop_cartRequest extends FormRequest
         return [
             
 				"order_no" => "nullable|unique:order_tb,order_no",
-				"product_id" => "nullable",
+				"product_id" => "required",
 				"vendor_id" => "required",
 				"user_id" => "nullable",
 				"mat_no" => "nullable",

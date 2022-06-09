@@ -26,10 +26,10 @@ class Users_TbAddRequest extends FormRequest
         return [
             
 				"firstname" => "required|string|unique:users_tb,firstname",
-				"lastname" => "required|string",
 				"email" => "required|email|unique:users_tb,email",
 				"password" => "required|same:confirm_password",
 				"photo" => "nullable",
+				"email_verified_at" => "nullable|date",
         ];
     }
 

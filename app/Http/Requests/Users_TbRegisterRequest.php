@@ -25,11 +25,12 @@ class Users_TbRegisterRequest extends FormRequest
 		
         return [
             
-				"firstname" => "required|string",
-				"lastname" => "required|string",
+				"firstname" => "required|string|unique:users_tb,firstname",
 				"email" => "required|email|unique:users_tb,email",
 				"department" => "required",
 				"password" => "required|same:confirm_password",
+				"photo" => "nullable",
+				"email_verified_at" => "nullable",
         ];
     }
 

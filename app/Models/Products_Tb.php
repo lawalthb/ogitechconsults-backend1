@@ -38,12 +38,12 @@ class Products_Tb extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				product_name LIKE ?  OR 
-				unit LIKE ?  OR 
-				description LIKE ?  OR 
-				level LIKE ?  OR 
-				available_for LIKE ?  OR 
-				vendor_email LIKE ? 
+				products_tb.product_name LIKE ?  OR 
+				products_tb.unit LIKE ?  OR 
+				products_tb.description LIKE ?  OR 
+				products_tb.level LIKE ?  OR 
+				products_tb.available_for LIKE ?  OR 
+				products_tb.vendor_email LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%","%$text%","%$text%","%$text%"
@@ -60,22 +60,13 @@ class Products_Tb extends Model
      */
 	public static function listFields(){
 		return [ 
-			"product_id", 
-			"product_name", 
-			"unit", 
-			"description", 
-			"image", 
-			"vendor_id", 
-			"department_id", 
-			"level", 
-			"sell_rate", 
-			"purchase_rate", 
-			"status", 
-			"reg_date", 
-			"available_for", 
-			"admin_id", 
-			"vendor_email", 
-			"qty" 
+			"products_tb.product_id AS product_id", 
+			"products_tb.product_name AS product_name", 
+			"products_tb.vendor_id AS vendor_id", 
+			"vendors_tb.name AS vendors_tb_name", 
+			"products_tb.department_id AS department_id", 
+			"departments_tb.name AS departments_tb_name", 
+			"products_tb.level AS level" 
 		];
 	}
 	
@@ -87,22 +78,13 @@ class Products_Tb extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"product_id", 
-			"product_name", 
-			"unit", 
-			"description", 
-			"image", 
-			"vendor_id", 
-			"department_id", 
-			"level", 
-			"sell_rate", 
-			"purchase_rate", 
-			"status", 
-			"reg_date", 
-			"available_for", 
-			"admin_id", 
-			"vendor_email", 
-			"qty" 
+			"products_tb.product_id AS product_id", 
+			"products_tb.product_name AS product_name", 
+			"products_tb.vendor_id AS vendor_id", 
+			"vendors_tb.name AS vendors_tb_name", 
+			"products_tb.department_id AS department_id", 
+			"departments_tb.name AS departments_tb_name", 
+			"products_tb.level AS level" 
 		];
 	}
 	
@@ -117,12 +99,10 @@ class Products_Tb extends Model
 			"products_tb.product_id AS product_id", 
 			"products_tb.product_name AS product_name", 
 			"products_tb.description AS description", 
-			"products_tb.vendor_id AS vendor_id", 
-			"products_tb.department_id AS department_id", 
 			"products_tb.sell_rate AS sell_rate", 
-			"vendors_tb.vendor_id AS vendors_tb_vendor_id", 
-			"vendors_tb.department_id AS vendors_tb_department_id", 
-			DB::raw("CONCAT(vendors_tb.title ,' ',vendors_tb.name) AS vendorFullname") 
+			"products_tb.vendor_id AS vendor_id", 
+			"vendors_tb.name AS vendors_tb_name", 
+			"products_tb.department_id AS department_id" 
 		];
 	}
 	
@@ -137,12 +117,10 @@ class Products_Tb extends Model
 			"products_tb.product_id AS product_id", 
 			"products_tb.product_name AS product_name", 
 			"products_tb.description AS description", 
-			"products_tb.vendor_id AS vendor_id", 
-			"products_tb.department_id AS department_id", 
 			"products_tb.sell_rate AS sell_rate", 
-			"vendors_tb.vendor_id AS vendors_tb_vendor_id", 
-			"vendors_tb.department_id AS vendors_tb_department_id", 
-			DB::raw("CONCAT(vendors_tb.title ,' ',vendors_tb.name) AS vendorFullname") 
+			"products_tb.vendor_id AS vendor_id", 
+			"vendors_tb.name AS vendors_tb_name", 
+			"products_tb.department_id AS department_id" 
 		];
 	}
 	
@@ -182,17 +160,10 @@ class Products_Tb extends Model
 		return [ 
 			"products_tb.product_id AS product_id", 
 			"products_tb.product_name AS product_name", 
-			"products_tb.vendor_id AS vendor_id", 
-			"products_tb.department_id AS department_id", 
-			"products_tb.level AS level", 
+			"products_tb.image AS image", 
 			"products_tb.sell_rate AS sell_rate", 
-			"vendors_tb.vendor_id AS vendors_tb_vendor_id", 
-			"vendors_tb.title AS vendors_tb_title", 
-			"vendors_tb.name AS vendors_tb_name", 
-			"vendors_tb.email AS vendors_tb_email", 
-			"vendors_tb.department_id AS vendors_tb_department_id", 
-			"vendors_tb.status AS vendors_tb_status", 
-			"vendors_tb.reg_date AS vendors_tb_reg_date" 
+			"products_tb.vendor_id AS vendor_id", 
+			"vendors_tb.name AS vendors_tb_name" 
 		];
 	}
 	
@@ -206,17 +177,10 @@ class Products_Tb extends Model
 		return [ 
 			"products_tb.product_id AS product_id", 
 			"products_tb.product_name AS product_name", 
-			"products_tb.vendor_id AS vendor_id", 
-			"products_tb.department_id AS department_id", 
-			"products_tb.level AS level", 
+			"products_tb.image AS image", 
 			"products_tb.sell_rate AS sell_rate", 
-			"vendors_tb.vendor_id AS vendors_tb_vendor_id", 
-			"vendors_tb.title AS vendors_tb_title", 
-			"vendors_tb.name AS vendors_tb_name", 
-			"vendors_tb.email AS vendors_tb_email", 
-			"vendors_tb.department_id AS vendors_tb_department_id", 
-			"vendors_tb.status AS vendors_tb_status", 
-			"vendors_tb.reg_date AS vendors_tb_reg_date" 
+			"products_tb.vendor_id AS vendor_id", 
+			"vendors_tb.name AS vendors_tb_name" 
 		];
 	}
 	

@@ -128,7 +128,9 @@ Route::middleware(['auth:api'])->group(function () {
 	Route::post('auth/register', 'AuthController@register');	
 	Route::post('auth/login', 'AuthController@login');	
 	Route::post('auth/forgotpassword', 'AuthController@forgotpassword')->name('password.reset');	
-	Route::post('auth/resetpassword', 'AuthController@resetpassword');
+	Route::post('auth/resetpassword', 'AuthController@resetpassword');	
+	Route::get('auth/verifyemail', 'AuthController@verifyemail')->name('verification.verify');	
+	Route::post('auth/resendverifyemail', 'AuthController@resendverifyemail');
 	
 Route::get('components_data/vendor_id_option_list/{arg1?}', 'Components_dataController@vendor_id_option_list');	
 Route::get('components_data/department_id_option_list/{arg1?}', 'Components_dataController@department_id_option_list');	
@@ -136,12 +138,16 @@ Route::get('components_data/product_id_option_list/{arg1?}', 'Components_dataCon
 Route::get('components_data/order_tb_order_no_exist/{arg1?}', 'Components_dataController@order_tb_order_no_exist');	
 Route::get('components_data/vendor_id_option_list_2/{arg1?}', 'Components_dataController@vendor_id_option_list_2');	
 Route::get('components_data/department_id_option_list_2/{arg1?}', 'Components_dataController@department_id_option_list_2');	
-Route::get('components_data/users_tb_email_exist/{arg1?}', 'Components_dataController@users_tb_email_exist');	
 Route::get('components_data/users_tb_firstname_exist/{arg1?}', 'Components_dataController@users_tb_firstname_exist');	
+Route::get('components_data/users_tb_email_exist/{arg1?}', 'Components_dataController@users_tb_email_exist');	
 Route::get('components_data/order_no_option_list/{arg1?}', 'Components_dataController@order_no_option_list');	
 Route::get('components_data/user_id_option_list/{arg1?}', 'Components_dataController@user_id_option_list');	
 Route::get('components_data/checkout_by_option_list/{arg1?}', 'Components_dataController@checkout_by_option_list');	
-Route::get('components_data/user_orders_view_name_option_list/{arg1?}', 'Components_dataController@user_orders_view_name_option_list');
+Route::get('components_data/user_orders_view_name_option_list/{arg1?}', 'Components_dataController@user_orders_view_name_option_list');	
+Route::get('components_data/getcount_totalorders/{arg1?}', 'Components_dataController@getcount_totalorders');	
+Route::get('components_data/getcount_totalrejected/{arg1?}', 'Components_dataController@getcount_totalrejected');	
+Route::get('components_data/getcount_totalitemsforme/{arg1?}', 'Components_dataController@getcount_totalitemsforme');	
+Route::get('components_data/getcount_totalcheckout/{arg1?}', 'Components_dataController@getcount_totalcheckout');
 
 Route::post('fileuploader/upload/{fieldname}', 'FileUploaderController@upload');
 Route::post('fileuploader/s3upload/{fieldname}', 'FileUploaderController@s3upload');

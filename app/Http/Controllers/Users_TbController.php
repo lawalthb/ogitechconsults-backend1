@@ -110,4 +110,18 @@ class Users_TbController extends Controller
 		}
 		return $this->respond($arr_id);
 	}
+	private function sendMailOnRecordUserregister($record = null){
+		try{
+			$subject = "New Users Tb Record Added";
+			$message = "New Users Tb record has been added";
+			$receiver = "account@flexplasttech.com";
+			$recid = $record->user_id;
+			$baseUrl = config('app.frontend_url');
+			$recordLink = "$baseUrl/#/users_tb/view/$recid";
+			$this->sendRecordActionMail($receiver, $subject, $message, $recordLink);
+		}
+		catch(Exception $ex){
+			throw $ex;
+		}
+	}
 }

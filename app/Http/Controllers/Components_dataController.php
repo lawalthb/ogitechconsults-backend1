@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Config;
 class Components_dataController extends Controller{
 	public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['users_tb_email_exist','department_id_option_list_2']]);
+        $this->middleware('auth:api', ['except' => ['users_tb_firstname_exist','users_tb_email_exist','department_id_option_list_2']]);
     }
 	/**
      * vendor_id_option_list Model Action
@@ -79,24 +79,24 @@ class Components_dataController extends Controller{
 		return $arr;
 	}
 	/**
-     * check if email value already exist in Users_Tb
-	 * @param string $value
-     * @return bool
-     */
-	function users_tb_email_exist(Request $request, $value){
-		$exist = DB::table('users_tb')->where('email', $value)->value('email');   
-		if($exist){
-			return "true";
-		}
-		return "false";
-	}
-	/**
      * check if firstname value already exist in Users_Tb
 	 * @param string $value
      * @return bool
      */
 	function users_tb_firstname_exist(Request $request, $value){
 		$exist = DB::table('users_tb')->where('firstname', $value)->value('firstname');   
+		if($exist){
+			return "true";
+		}
+		return "false";
+	}
+	/**
+     * check if email value already exist in Users_Tb
+	 * @param string $value
+     * @return bool
+     */
+	function users_tb_email_exist(Request $request, $value){
+		$exist = DB::table('users_tb')->where('email', $value)->value('email');   
 		if($exist){
 			return "true";
 		}
@@ -141,5 +141,48 @@ class Components_dataController extends Controller{
 		$query_params = [];
 		$arr = DB::select(DB::raw($sqltext), $query_params);
 		return $arr;
+	}
+	/**
+     * getcount_totalorders Model Action
+     * @return Value
+     */
+	function getcount_totalorders(Request $request){
+		$sqltext = "SELECT COUNT(*) AS num FROM user_orders_view WHERE user_id = :user_id"   ;
+		$query_params = [];
+		$query_params['user_id'] = auth()->user()->user_id;
+		$val = DB::select(DB::raw($sqltext), $query_params);
+		return $val[0]->num;
+	}
+	/**
+     * getcount_totalrejected Model Action
+     * @return Value
+     */
+	function getcount_totalrejected(Request $request){
+		$sqltext = "SELECT COUNT(*) AS num FROM order_tb WHERE user_id= :user_id and sales_status =3"  ;
+		$query_params = [];
+$query_params['user_id'] = auth()->user()->user_id;
+		$val = DB::select(DB::raw($sqltext), $query_params);
+		return $val[0]->num;
+	}
+	/**
+     * getcount_totalitemsforme Model Action
+     * @return Value
+     */
+	function getcount_totalitemsforme(Request $request){
+		$sqltext = "SELECT COUNT(*) AS num FROM products_tb";
+		$query_params = [];
+		$val = DB::select(DB::raw($sqltext), $query_params);
+		return $val[0]->num;
+	}
+	/**
+     * getcount_totalcheckout Model Action
+     * @return Value
+     */
+	function getcount_totalcheckout(Request $request){
+		$sqltext = "SELECT COUNT(*) AS num FROM order_tb WHERE user_id= :user_id and sales_status =2" ;
+		$query_params = [];
+$query_params['user_id'] = auth()->user()->user_id;
+		$val = DB::select(DB::raw($sqltext), $query_params);
+		return $val[0]->num;
 	}
 }

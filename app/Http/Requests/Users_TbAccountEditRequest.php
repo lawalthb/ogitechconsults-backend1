@@ -34,6 +34,7 @@ class Users_TbAccountEditRequest extends FormRequest
 				"status" => "filled|numeric",
 				"gender" => "nullable",
 				"photo" => "nullable",
+				"email_verified_at" => "nullable|date",
         ];
     }
 
