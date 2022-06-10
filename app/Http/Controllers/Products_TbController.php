@@ -43,7 +43,7 @@ class Products_TbController extends Controller
      */
 	function view($rec_id = null){
 		$query = Products_Tb::query();
-		$query->join("vendors_tb", "products_tb.vendor_id", "=", "vendors_tb.vendor_id");
+		$query->rightJoin("vendors_tb", "products_tb.vendor_id", "=", "vendors_tb.vendor_id");
 		$record = $query->findOrFail($rec_id, Products_Tb::viewFields());
 		return $this->respond($record);
 	}
@@ -120,7 +120,7 @@ class Products_TbController extends Controller
 			$search = trim($request->search);
 			Products_Tb::search($query, $search);
 		}
-		$query->join("vendors_tb", "products_tb.vendor_id", "=", "vendors_tb.vendor_id");
+		$query->rightJoin("vendors_tb", "products_tb.vendor_id", "=", "vendors_tb.vendor_id");
 		$orderby = $request->orderby ?? "products_tb.product_id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);

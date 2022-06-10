@@ -62,6 +62,7 @@ class Products_Tb extends Model
 		return [ 
 			"products_tb.product_id AS product_id", 
 			"products_tb.product_name AS product_name", 
+			"products_tb.image AS image", 
 			"products_tb.vendor_id AS vendor_id", 
 			"vendors_tb.name AS vendors_tb_name", 
 			"products_tb.department_id AS department_id", 
@@ -80,6 +81,7 @@ class Products_Tb extends Model
 		return [ 
 			"products_tb.product_id AS product_id", 
 			"products_tb.product_name AS product_name", 
+			"products_tb.image AS image", 
 			"products_tb.vendor_id AS vendor_id", 
 			"vendors_tb.name AS vendors_tb_name", 
 			"products_tb.department_id AS department_id", 
@@ -102,7 +104,10 @@ class Products_Tb extends Model
 			"products_tb.sell_rate AS sell_rate", 
 			"products_tb.vendor_id AS vendor_id", 
 			"vendors_tb.name AS vendors_tb_name", 
-			"products_tb.department_id AS department_id" 
+			"products_tb.department_id AS department_id", 
+			"vendors_tb.vendor_id AS vendors_tb_vendor_id", 
+			"vendors_tb.name AS vendors_tb_name", 
+			"vendors_tb.department_id AS vendors_tb_department_id" 
 		];
 	}
 	
@@ -120,7 +125,10 @@ class Products_Tb extends Model
 			"products_tb.sell_rate AS sell_rate", 
 			"products_tb.vendor_id AS vendor_id", 
 			"vendors_tb.name AS vendors_tb_name", 
-			"products_tb.department_id AS department_id" 
+			"products_tb.department_id AS department_id", 
+			"vendors_tb.vendor_id AS vendors_tb_vendor_id", 
+			"vendors_tb.name AS vendors_tb_name", 
+			"vendors_tb.department_id AS vendors_tb_department_id" 
 		];
 	}
 	
@@ -162,7 +170,8 @@ class Products_Tb extends Model
 			"products_tb.product_name AS product_name", 
 			"products_tb.image AS image", 
 			"products_tb.sell_rate AS sell_rate", 
-			"products_tb.vendor_id AS vendor_id", 
+			"vendors_tb.name AS vendors_tb_name", 
+			"vendors_tb.vendor_id AS vendors_tb_vendor_id", 
 			"vendors_tb.name AS vendors_tb_name" 
 		];
 	}
@@ -179,7 +188,8 @@ class Products_Tb extends Model
 			"products_tb.product_name AS product_name", 
 			"products_tb.image AS image", 
 			"products_tb.sell_rate AS sell_rate", 
-			"products_tb.vendor_id AS vendor_id", 
+			"vendors_tb.name AS vendors_tb_name", 
+			"vendors_tb.vendor_id AS vendors_tb_vendor_id", 
 			"vendors_tb.name AS vendors_tb_name" 
 		];
 	}

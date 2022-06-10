@@ -111,6 +111,7 @@ Route::middleware(['auth:api'])->group(function () {
 	Route::get('user_orders_view', 'User_Orders_ViewController@index');
 	Route::get('user_orders_view/index', 'User_Orders_ViewController@index');
 	Route::get('user_orders_view/index/{filter?}/{filtervalue?}', 'User_Orders_ViewController@index');
+	Route::any('user_orders_view/delete/{rec_id}', 'Order_TbController@delete');
 
 /* routes for Level Controller  */	
 	Route::get('level', 'LevelController@index');
@@ -128,9 +129,7 @@ Route::middleware(['auth:api'])->group(function () {
 	Route::post('auth/register', 'AuthController@register');	
 	Route::post('auth/login', 'AuthController@login');	
 	Route::post('auth/forgotpassword', 'AuthController@forgotpassword')->name('password.reset');	
-	Route::post('auth/resetpassword', 'AuthController@resetpassword');	
-	Route::get('auth/verifyemail', 'AuthController@verifyemail')->name('verification.verify');	
-	Route::post('auth/resendverifyemail', 'AuthController@resendverifyemail');
+	Route::post('auth/resetpassword', 'AuthController@resetpassword');
 	
 Route::get('components_data/vendor_id_option_list/{arg1?}', 'Components_dataController@vendor_id_option_list');	
 Route::get('components_data/department_id_option_list/{arg1?}', 'Components_dataController@department_id_option_list');	
@@ -145,9 +144,11 @@ Route::get('components_data/user_id_option_list/{arg1?}', 'Components_dataContro
 Route::get('components_data/checkout_by_option_list/{arg1?}', 'Components_dataController@checkout_by_option_list');	
 Route::get('components_data/user_orders_view_name_option_list/{arg1?}', 'Components_dataController@user_orders_view_name_option_list');	
 Route::get('components_data/getcount_totalorders/{arg1?}', 'Components_dataController@getcount_totalorders');	
-Route::get('components_data/getcount_totalrejected/{arg1?}', 'Components_dataController@getcount_totalrejected');	
-Route::get('components_data/getcount_totalitemsforme/{arg1?}', 'Components_dataController@getcount_totalitemsforme');	
-Route::get('components_data/getcount_totalcheckout/{arg1?}', 'Components_dataController@getcount_totalcheckout');
+Route::get('components_data/getcount_totalordersapproved/{arg1?}', 'Components_dataController@getcount_totalordersapproved');	
+Route::get('components_data/getcount_totalorderpending/{arg1?}', 'Components_dataController@getcount_totalorderpending');	
+Route::get('components_data/getcount_totalorderrejected/{arg1?}', 'Components_dataController@getcount_totalorderrejected');	
+Route::get('components_data/getcount_totalitem/{arg1?}', 'Components_dataController@getcount_totalitem');	
+Route::get('components_data/getcount_totalamountspent/{arg1?}', 'Components_dataController@getcount_totalamountspent');
 
 Route::post('fileuploader/upload/{fieldname}', 'FileUploaderController@upload');
 Route::post('fileuploader/s3upload/{fieldname}', 'FileUploaderController@s3upload');

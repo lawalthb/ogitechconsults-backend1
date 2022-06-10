@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Config;
 class Components_dataController extends Controller{
 	public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['users_tb_firstname_exist','users_tb_email_exist','department_id_option_list_2']]);
+        $this->middleware('auth:api', ['except' => ['users_tb_firstname_exist','users_tb_email_exist']]);
     }
 	/**
      * vendor_id_option_list Model Action
@@ -147,39 +147,61 @@ class Components_dataController extends Controller{
      * @return Value
      */
 	function getcount_totalorders(Request $request){
-		$sqltext = "SELECT COUNT(*) AS num FROM user_orders_view WHERE user_id = :user_id"   ;
-		$query_params = [];
-		$query_params['user_id'] = auth()->user()->user_id;
-		$val = DB::select(DB::raw($sqltext), $query_params);
-		return $val[0]->num;
-	}
-	/**
-     * getcount_totalrejected Model Action
-     * @return Value
-     */
-	function getcount_totalrejected(Request $request){
-		$sqltext = "SELECT COUNT(*) AS num FROM order_tb WHERE user_id= :user_id and sales_status =3"  ;
+		$sqltext = "SELECT COUNT(*) AS num FROM order_tb where user_id = :user_id"   ;
 		$query_params = [];
 $query_params['user_id'] = auth()->user()->user_id;
 		$val = DB::select(DB::raw($sqltext), $query_params);
 		return $val[0]->num;
 	}
 	/**
-     * getcount_totalitemsforme Model Action
+     * getcount_totalordersapproved Model Action
      * @return Value
      */
-	function getcount_totalitemsforme(Request $request){
-		$sqltext = "SELECT COUNT(*) AS num FROM products_tb";
+	function getcount_totalordersapproved(Request $request){
+		$sqltext = "SELECT COUNT(*) AS num FROM order_tb where user_id = :user_id and order_status ='2'" ;
+		$query_params = [];
+		$query_params['user_id'] = auth()->user()->user_id;
+		$val = DB::select(DB::raw($sqltext), $query_params);
+		return $val[0]->num;
+	}
+	/**
+     * getcount_totalorderpending Model Action
+     * @return Value
+     */
+	function getcount_totalorderpending(Request $request){
+		$sqltext = "SELECT COUNT(*) AS num FROM order_tb where user_id = :user_id and order_status ='1'"    ;
+		$query_params = [];
+		$query_params['user_id'] = auth()->user()->user_id;
+		$val = DB::select(DB::raw($sqltext), $query_params);
+		return $val[0]->num;
+	}
+	/**
+     * getcount_totalorderrejected Model Action
+     * @return Value
+     */
+	function getcount_totalorderrejected(Request $request){
+		$sqltext = "SELECT COUNT(*) AS num FROM order_tb where user_id = :user_id and order_status ='3'"    ;
+		$query_params = [];
+		$query_params['user_id'] = auth()->user()->user_id;
+		$val = DB::select(DB::raw($sqltext), $query_params);
+		return $val[0]->num;
+	}
+	/**
+     * getcount_totalitem Model Action
+     * @return Value
+     */
+	function getcount_totalitem(Request $request){
+		$sqltext = "SELECT  count(*) as num FROM products_tb WHERE  (products_tb.available_for  LIKE '%1%' )";
 		$query_params = [];
 		$val = DB::select(DB::raw($sqltext), $query_params);
 		return $val[0]->num;
 	}
 	/**
-     * getcount_totalcheckout Model Action
+     * getcount_totalamountspent Model Action
      * @return Value
      */
-	function getcount_totalcheckout(Request $request){
-		$sqltext = "SELECT COUNT(*) AS num FROM order_tb WHERE user_id= :user_id and sales_status =2" ;
+	function getcount_totalamountspent(Request $request){
+		$sqltext = "SELECT  SUM(sales_tb.total_amount) AS sum_of_total_amount FROM sales_tb WHERE  (sales_tb.sales_status  =2 ) AND (sales_tb.user_id  =auth()->user()->user_id; )" ;
 		$query_params = [];
 $query_params['user_id'] = auth()->user()->user_id;
 		$val = DB::select(DB::raw($sqltext), $query_params);

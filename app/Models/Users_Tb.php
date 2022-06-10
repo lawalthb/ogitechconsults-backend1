@@ -1,11 +1,10 @@
 <?php 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
-class Users_Tb extends Authenticatable implements MustVerifyEmail
+class Users_Tb extends Authenticatable 
 {
 	use Notifiable, HasApiTokens;
 	
@@ -279,15 +278,5 @@ class Users_Tb extends Authenticatable implements MustVerifyEmail
 	{
 		// Your your own implementation.
 		$this->notify(new \App\Notifications\ResetPassword($token));
-	}
-	
-
-	/**
-     * Send user account verification link to user email
-     * @return string
-     */
-	public function sendEmailVerificationNotification()
-	{
-		$this->notify(new \App\Notifications\VerifyEmail); // my notification
 	}
 }

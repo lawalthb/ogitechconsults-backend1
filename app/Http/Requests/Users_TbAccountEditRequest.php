@@ -29,7 +29,7 @@ class Users_TbAccountEditRequest extends FormRequest
 				"firstname" => "filled|string",
 				"lastname" => "filled|string",
 				"phone" => "nullable|string",
-				"department" => "filled|string",
+				"department" => "filled",
 				"level" => "nullable|string",
 				"status" => "filled|numeric",
 				"gender" => "nullable",

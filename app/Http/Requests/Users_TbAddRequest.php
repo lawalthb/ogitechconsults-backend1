@@ -29,7 +29,6 @@ class Users_TbAddRequest extends FormRequest
 				"email" => "required|email|unique:users_tb,email",
 				"password" => "required|same:confirm_password",
 				"photo" => "nullable",
-				"email_verified_at" => "nullable|date",
         ];
     }
 

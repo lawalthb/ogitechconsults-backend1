@@ -40,4 +40,22 @@ class User_Orders_ViewController extends Controller
 		$records = $this->paginate($query, User_Orders_View::listFields());
 		return $this->respond($records);
 	}
+
+
+	
+	/**
+     * Delete record from the database
+	 * Support multi delete by separating record id by comma.
+	 * @param  \Illuminate\Http\Request
+	 * @param string $rec_id //can be separated by comma 
+     * @return \Illuminate\Http\Response
+     */
+	function delete(Request $request, $rec_id = null){
+		$arr_id = explode(",", $rec_id);
+		$query = Order_Tb::query();
+		$query->whereIn("order_id", $arr_id);
+		$query->delete();
+		return $this->respond($arr_id);
+	}
+	
 }
