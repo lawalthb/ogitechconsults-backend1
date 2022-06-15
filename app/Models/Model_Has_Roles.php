@@ -2,7 +2,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-class Vendors_Tb extends Model 
+class Model_Has_Roles extends Model 
 {
 	
 
@@ -11,7 +11,7 @@ class Vendors_Tb extends Model
      *
      * @var string
      */
-	protected $table = 'vendors_tb';
+	protected $table = 'model_has_roles';
 	
 
 	/**
@@ -19,7 +19,8 @@ class Vendors_Tb extends Model
      *
      * @var string
      */
-	protected $primaryKey = 'vendor_id';
+	protected $primaryKey = 'model_id';
+	public $incrementing = false;
 	
 
 	/**
@@ -27,7 +28,7 @@ class Vendors_Tb extends Model
      *
      * @var array
      */
-	protected $fillable = ["title","name","email","department_id","status","password"];
+	protected $fillable = ["role_id","model_type","model_id"];
 	
 
 	/**
@@ -38,13 +39,10 @@ class Vendors_Tb extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				title LIKE ?  OR 
-				name LIKE ?  OR 
-				email LIKE ?  OR 
-				password LIKE ? 
+				model_type LIKE ? 
 		)';
 		$search_params = [
-			"%$text%","%$text%","%$text%","%$text%"
+			"%$text%"
 		];
 		//setting search conditions
 		$query->whereRaw($search_condition, $search_params);
@@ -58,13 +56,9 @@ class Vendors_Tb extends Model
      */
 	public static function listFields(){
 		return [ 
-			"vendor_id", 
-			"title", 
-			"name", 
-			"email", 
-			"department_id", 
-			"status", 
-			"reg_date" 
+			"role_id", 
+			"model_type", 
+			"model_id" 
 		];
 	}
 	
@@ -76,13 +70,9 @@ class Vendors_Tb extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"vendor_id", 
-			"title", 
-			"name", 
-			"email", 
-			"department_id", 
-			"status", 
-			"reg_date" 
+			"role_id", 
+			"model_type", 
+			"model_id" 
 		];
 	}
 	
@@ -94,13 +84,9 @@ class Vendors_Tb extends Model
      */
 	public static function viewFields(){
 		return [ 
-			"vendor_id", 
-			"title", 
-			"name", 
-			"email", 
-			"department_id", 
-			"status", 
-			"reg_date" 
+			"role_id", 
+			"model_type", 
+			"model_id" 
 		];
 	}
 	
@@ -112,13 +98,9 @@ class Vendors_Tb extends Model
      */
 	public static function exportViewFields(){
 		return [ 
-			"vendor_id", 
-			"title", 
-			"name", 
-			"email", 
-			"department_id", 
-			"status", 
-			"reg_date" 
+			"role_id", 
+			"model_type", 
+			"model_id" 
 		];
 	}
 	
@@ -130,12 +112,9 @@ class Vendors_Tb extends Model
      */
 	public static function editFields(){
 		return [ 
-			"vendor_id", 
-			"title", 
-			"name", 
-			"email", 
-			"department_id", 
-			"status" 
+			"role_id", 
+			"model_type", 
+			"model_id" 
 		];
 	}
 	

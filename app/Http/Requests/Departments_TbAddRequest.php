@@ -25,9 +25,6 @@ class Departments_TbAddRequest extends FormRequest
 		
         return [
             
-				"name" => "required|string",
-				"faculty" => "nullable|string",
-				"status" => "required|numeric",
         ];
     }
 

@@ -35,32 +35,6 @@ class Departments_TbController extends Controller
 	
 
 	/**
-     * Select table record by ID
-	 * @param string $rec_id
-     * @return \Illuminate\View\View
-     */
-	function view($rec_id = null){
-		$query = Departments_Tb::query();
-		$record = $query->findOrFail($rec_id, Departments_Tb::viewFields());
-		return $this->respond($record);
-	}
-	
-
-	/**
-     * Save form record to the table
-     * @return \Illuminate\Http\Response
-     */
-	function add(Departments_TbAddRequest $request){
-		$modeldata = $request->validated();
-		
-		//save Departments_Tb record
-		$record = Departments_Tb::create($modeldata);
-		$rec_id = $record->department_id;
-		return $this->respond($record);
-	}
-	
-
-	/**
      * Update table record with form data
 	 * @param string $rec_id //select record by table primary key
      * @return \Illuminate\View\View;

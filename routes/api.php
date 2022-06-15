@@ -44,7 +44,10 @@ Route::middleware(['auth:api'])->group(function () {
 	Route::get('order_tb/view/{rec_id}', 'Order_TbController@view');	
 	Route::post('order_tb/add', 'Order_TbController@add');	
 	Route::any('order_tb/edit/{rec_id}', 'Order_TbController@edit');	
-	Route::any('order_tb/delete/{rec_id}', 'Order_TbController@delete');	
+	Route::any('order_tb/delete/{rec_id}', 'Order_TbController@delete');
+	Route::any('user_orders_view/delete/{rec_id}', 'Order_TbController@delete');
+	
+
 	Route::post('order_tb/shop_cart', 'Order_TbController@shop_cart');	
 	Route::get('order_tb/user_orders', 'Order_TbController@user_orders');
 	Route::get('order_tb/user_orders/{filter?}/{filtervalue?}', 'Order_TbController@user_orders');
@@ -53,8 +56,6 @@ Route::middleware(['auth:api'])->group(function () {
 	Route::get('departments_tb', 'Departments_TbController@index');
 	Route::get('departments_tb/index', 'Departments_TbController@index');
 	Route::get('departments_tb/index/{filter?}/{filtervalue?}', 'Departments_TbController@index');	
-	Route::get('departments_tb/view/{rec_id}', 'Departments_TbController@view');	
-	Route::post('departments_tb/add', 'Departments_TbController@add');	
 	Route::any('departments_tb/edit/{rec_id}', 'Departments_TbController@edit');	
 	Route::any('departments_tb/delete/{rec_id}', 'Departments_TbController@delete');
 
@@ -111,7 +112,6 @@ Route::middleware(['auth:api'])->group(function () {
 	Route::get('user_orders_view', 'User_Orders_ViewController@index');
 	Route::get('user_orders_view/index', 'User_Orders_ViewController@index');
 	Route::get('user_orders_view/index/{filter?}/{filtervalue?}', 'User_Orders_ViewController@index');
-	Route::any('user_orders_view/delete/{rec_id}', 'Order_TbController@delete');
 
 /* routes for Level Controller  */	
 	Route::get('level', 'LevelController@index');
@@ -121,6 +121,25 @@ Route::middleware(['auth:api'])->group(function () {
 	Route::post('level/add', 'LevelController@add');	
 	Route::any('level/edit/{rec_id}', 'LevelController@edit');	
 	Route::any('level/delete/{rec_id}', 'LevelController@delete');
+
+/* routes for Permissions Controller  */
+
+/* routes for Roles Controller  */
+
+/* routes for Model_Has_Roles Controller  */
+
+/* routes for Model_Has_Permissions Controller  */
+
+/* routes for Role_Has_Permissions Controller  */
+
+/* routes for Product_Departments Controller  */	
+	Route::get('product_departments', 'Product_DepartmentsController@index');
+	Route::get('product_departments/index', 'Product_DepartmentsController@index');
+	Route::get('product_departments/index/{filter?}/{filtervalue?}', 'Product_DepartmentsController@index');	
+	Route::get('product_departments/view/{rec_id}', 'Product_DepartmentsController@view');	
+	Route::post('product_departments/add', 'Product_DepartmentsController@add');	
+	Route::any('product_departments/edit/{rec_id}', 'Product_DepartmentsController@edit');	
+	Route::any('product_departments/delete/{rec_id}', 'Product_DepartmentsController@delete');
 });
 
 	

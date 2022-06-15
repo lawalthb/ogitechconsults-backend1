@@ -3,7 +3,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-class Admins_TbAddRequest extends FormRequest
+class Model_Has_PermissionsAddRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,15 +25,9 @@ class Admins_TbAddRequest extends FormRequest
 		
         return [
             
-				"firstname" => "required|string",
-				"lastname" => "required|string",
-				"email" => "required|email",
-				"password" => "required|same:confirm_password",
-				"username" => "required|string",
-				"admin_type" => "required|string",
-				"status" => "nullable|numeric",
-				"deleted" => "required|numeric",
-				"photo" => "nullable",
+				"permission_id" => "required",
+				"model_type" => "required|string",
+				"model_id" => "required|numeric",
         ];
     }
 

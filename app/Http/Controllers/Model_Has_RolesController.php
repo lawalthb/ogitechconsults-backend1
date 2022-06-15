@@ -1,12 +1,12 @@
 <?php 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admins_TbAddRequest;
-use App\Http\Requests\Admins_TbEditRequest;
-use App\Models\Admins_Tb;
+use App\Http\Requests\Model_Has_RolesAddRequest;
+use App\Http\Requests\Model_Has_RolesEditRequest;
+use App\Models\Model_Has_Roles;
 use Illuminate\Http\Request;
 use Exception;
-class Admins_TbController extends Controller
+class Model_Has_RolesController extends Controller
 {
 	
 
@@ -18,18 +18,18 @@ class Admins_TbController extends Controller
      * @return \Illuminate\View\View
      */
 	function index(Request $request, $fieldname = null , $fieldvalue = null){
-		$query = Admins_Tb::query();
+		$query = Model_Has_Roles::query();
 		if($request->search){
 			$search = trim($request->search);
-			Admins_Tb::search($query, $search);
+			Model_Has_Roles::search($query, $search);
 		}
-		$orderby = $request->orderby ?? "admins_tb.admin_id";
+		$orderby = $request->orderby ?? "model_has_roles.model_id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a single field name
 		}
-		$records = $this->paginate($query, Admins_Tb::listFields());
+		$records = $this->paginate($query, Model_Has_Roles::listFields());
 		return $this->respond($records);
 	}
 	
@@ -40,8 +40,8 @@ class Admins_TbController extends Controller
      * @return \Illuminate\View\View
      */
 	function view($rec_id = null){
-		$query = Admins_Tb::query();
-		$record = $query->findOrFail($rec_id, Admins_Tb::viewFields());
+		$query = Model_Has_Roles::query();
+		$record = $query->findOrFail($rec_id, Model_Has_Roles::viewFields());
 		return $this->respond($record);
 	}
 	
@@ -50,19 +50,12 @@ class Admins_TbController extends Controller
      * Save form record to the table
      * @return \Illuminate\Http\Response
      */
-	function add(Admins_TbAddRequest $request){
+	function add(Model_Has_RolesAddRequest $request){
 		$modeldata = $request->validated();
 		
-		if( array_key_exists("photo", $modeldata) ){
-			//move uploaded file from temp directory to destination directory
-			$fileInfo = $this->moveUploadedFiles($modeldata['photo'], "photo");
-			$modeldata['photo'] = $fileInfo['filepath'];
-		}
-		$modeldata['password'] = bcrypt($modeldata['password']);
-		
-		//save Admins_Tb record
-		$record = Admins_Tb::create($modeldata);
-		$rec_id = $record->admin_id;
+		//save Model_Has_Roles record
+		$record = Model_Has_Roles::create($modeldata);
+		$rec_id = $record->model_id;
 		return $this->respond($record);
 	}
 	
@@ -72,17 +65,11 @@ class Admins_TbController extends Controller
 	 * @param string $rec_id //select record by table primary key
      * @return \Illuminate\View\View;
      */
-	function edit(Admins_TbEditRequest $request, $rec_id = null){
-		$query = Admins_Tb::query();
-		$record = $query->findOrFail($rec_id, Admins_Tb::editFields());
+	function edit(Model_Has_RolesEditRequest $request, $rec_id = null){
+		$query = Model_Has_Roles::query();
+		$record = $query->findOrFail($rec_id, Model_Has_Roles::editFields());
 		if ($request->isMethod('post')) {
 			$modeldata = $request->validated();
-		
-		if( array_key_exists("photo", $modeldata) ){
-			//move uploaded file from temp directory to destination directory
-			$fileInfo = $this->moveUploadedFiles($modeldata['photo'], "photo");
-			$modeldata['photo'] = $fileInfo['filepath'];
-		}
 			$record->update($modeldata);
 		}
 		return $this->respond($record);
@@ -98,8 +85,8 @@ class Admins_TbController extends Controller
      */
 	function delete(Request $request, $rec_id = null){
 		$arr_id = explode(",", $rec_id);
-		$query = Admins_Tb::query();
-		$query->whereIn("admin_id", $arr_id);
+		$query = Model_Has_Roles::query();
+		$query->whereIn("model_id", $arr_id);
 		$query->delete();
 		return $this->respond($arr_id);
 	}

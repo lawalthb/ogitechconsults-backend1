@@ -30,6 +30,7 @@ class Vendors_TbAddRequest extends FormRequest
 				"email" => "nullable|email",
 				"department_id" => "required",
 				"status" => "required|numeric",
+				"password" => "required|same:confirm_password",
         ];
     }
 

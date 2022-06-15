@@ -32,6 +32,7 @@ class Admins_TbEditRequest extends FormRequest
 				"admin_type" => "filled|string",
 				"status" => "nullable|numeric",
 				"deleted" => "filled|numeric",
+				"photo" => "nullable",
         ];
     }
 

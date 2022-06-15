@@ -157,10 +157,8 @@ class Users_Tb extends Authenticatable
 			"phone", 
 			"department", 
 			"level", 
-			"status", 
 			"gender", 
-			"photo", 
-			"email_verified_at" 
+			"photo" 
 		];
 	}
 	

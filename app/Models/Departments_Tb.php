@@ -82,33 +82,12 @@ class Departments_Tb extends Model
 	
 
 	/**
-     * return view page fields of the model.
-     * 
-     * @return array
-     */
-	public static function viewFields(){
-		return [ 
-			"department_id", 
-			"name", 
-			"faculty", 
-			"status", 
-			"reg_date" 
-		];
-	}
-	
-
-	/**
      * return exportView page fields of the model.
      * 
      * @return array
      */
 	public static function exportViewFields(){
 		return [ 
-			"department_id", 
-			"name", 
-			"faculty", 
-			"status", 
-			"reg_date" 
 		];
 	}
 	

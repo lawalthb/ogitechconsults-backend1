@@ -27,7 +27,7 @@ class Admins_Tb extends Model
      *
      * @var array
      */
-	protected $fillable = ["firstname","lastname","email","password","username","admin_type","status","deleted"];
+	protected $fillable = ["firstname","lastname","email","password","username","admin_type","status","deleted","photo"];
 	
 
 	/**
@@ -68,7 +68,8 @@ class Admins_Tb extends Model
 			"admin_type", 
 			"status", 
 			"reg_date", 
-			"deleted" 
+			"deleted", 
+			"photo" 
 		];
 	}
 	
@@ -88,7 +89,8 @@ class Admins_Tb extends Model
 			"admin_type", 
 			"status", 
 			"reg_date", 
-			"deleted" 
+			"deleted", 
+			"photo" 
 		];
 	}
 	
@@ -108,7 +110,8 @@ class Admins_Tb extends Model
 			"admin_type", 
 			"status", 
 			"reg_date", 
-			"deleted" 
+			"deleted", 
+			"photo" 
 		];
 	}
 	
@@ -128,7 +131,8 @@ class Admins_Tb extends Model
 			"admin_type", 
 			"status", 
 			"reg_date", 
-			"deleted" 
+			"deleted", 
+			"photo" 
 		];
 	}
 	
@@ -147,7 +151,8 @@ class Admins_Tb extends Model
 			"username", 
 			"admin_type", 
 			"status", 
-			"deleted" 
+			"deleted", 
+			"photo" 
 		];
 	}
 	

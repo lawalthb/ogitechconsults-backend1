@@ -52,6 +52,7 @@ class Vendors_TbController extends Controller
      */
 	function add(Vendors_TbAddRequest $request){
 		$modeldata = $request->validated();
+		$modeldata['password'] = bcrypt($modeldata['password']);
 		
 		//save Vendors_Tb record
 		$record = Vendors_Tb::create($modeldata);
